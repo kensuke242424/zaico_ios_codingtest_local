@@ -11,7 +11,7 @@ protocol InventoryCreationDelegate: AnyObject {
     func didCreateNewInventory()
 }
 
-class CreateInventoryViewController: UIViewController, UITextFieldDelegate {
+class InventoryCreateViewController: UIViewController, UITextFieldDelegate {
     
     private let inventories: [Inventory]
     private let titleLabel = UILabel()

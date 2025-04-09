@@ -31,9 +31,9 @@ class InventoryListViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @objc func createInventoryBarButtonTapped() {
-        let createInventoryVC = CreateInventoryViewController(inventories: inventories)
-        createInventoryVC.delegate = self
-        navigationController?.pushViewController(createInventoryVC, animated: true)
+        let inventoryCreateVC = InventoryCreateViewController(inventories: inventories)
+        inventoryCreateVC.delegate = self
+        navigationController?.pushViewController(inventoryCreateVC, animated: true)
     }
     
     private func setupTableView() {
