@@ -10,32 +10,32 @@ import UIKit
 class InventoryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let tableView = UITableView()
     private var inventories: [Inventory] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         setupNavigationBar()
         setupTableView()
-
+        
         Task {
             await fetchInventories()
         }
     }
-
+    
     private func setupNavigationBar() {
         title = "在庫一覧"
-
+        
         let createInventoryBarButton = UIBarButtonItem(title: "新規登録", style: .done, target: self, action: #selector(createInventoryBarButtonTapped))
         self.navigationItem.rightBarButtonItem = createInventoryBarButton
     }
-
+    
     @objc func createInventoryBarButtonTapped() {
         let createInventoryVC = CreateInventoryViewController(inventories: inventories)
         createInventoryVC.delegate = self
         navigationController?.pushViewController(createInventoryVC, animated: true)
     }
-
+    
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.register(InventoryCell.self, forCellReuseIdentifier: "InventoryCell")
@@ -46,12 +46,12 @@ class InventoryListViewController: UIViewController, UITableViewDataSource, UITa
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-
+    
     private func fetchInventories() async {
         do {
             let data = try await APIClient.shared.fetchInventories()
@@ -63,18 +63,18 @@ class InventoryListViewController: UIViewController, UITableViewDataSource, UITa
             print("Error fetching Inventories: \(error.localizedDescription)")
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inventories.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InventoryCell", for: indexPath) as! InventoryCell
         cell.configure(leftText: String(inventories[indexPath.row].id),
                        rightText: inventories[indexPath.row].title)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inventoryDetailVC = InventoryDetailViewController(id: inventories[indexPath.row].id)
         navigationController?.pushViewController(inventoryDetailVC, animated: true)
