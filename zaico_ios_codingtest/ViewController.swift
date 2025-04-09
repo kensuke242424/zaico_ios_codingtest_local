@@ -14,13 +14,26 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "在庫一覧"
-        
+
+        setupNavigationBar()
         setupTableView()
-        
+
         Task {
-            await fetchData()
+            await fetchInventories()
         }
+    }
+
+    private func setupNavigationBar() {
+        title = "在庫一覧"
+
+        let createInventoryBarButton = UIBarButtonItem(title: "新規登録", style: .done, target: self, action: #selector(createInventoryBarButtonTapped))
+        self.navigationItem.rightBarButtonItem = createInventoryBarButton
+    }
+
+    @objc func createInventoryBarButtonTapped() {
+        let createInventoryVC = CreateInventoryViewController(inventories: inventories)
+        createInventoryVC.delegate = self
+        navigationController?.pushViewController(createInventoryVC, animated: true)
     }
 
     private func setupTableView() {
@@ -33,13 +46,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    
-    private func fetchData() async {
+
+    private func fetchInventories() async {
         do {
             let data = try await APIClient.shared.fetchInventories()
             await MainActor.run {
@@ -47,7 +60,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 tableView.reloadData()
             }
         } catch {
-            print("Error fetching data: \(error.localizedDescription)")
+            print("Error fetching Inventories: \(error.localizedDescription)")
         }
     }
 
@@ -61,9 +74,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                        rightText: inventories[indexPath.row].title)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController(id: inventories[indexPath.row].id)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+// 新規データ作成完了時、アイテムデータを再取得
+extension MainViewController: InventoryCreationDelegate {
+    func didCreateNewInventory() {
+        Task {
+            await fetchInventories()
+        }
     }
 }
