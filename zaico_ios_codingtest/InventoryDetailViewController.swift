@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class InventoryDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     private let inventoryId: Int
     private var inventory: Inventory?
@@ -56,7 +56,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     private func fetchData() async {
         do {
-            let data = try await APIClient.shared.fetchInventorie(id: inventoryId)
+            let data = try await APIClient.shared.fetchInventory(id: inventoryId)
             await MainActor.run {
                 inventory = data
                 tableView.reloadData()
@@ -69,7 +69,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTitles.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InventoryCell", for: indexPath) as! InventoryCell
         switch indexPath.row {

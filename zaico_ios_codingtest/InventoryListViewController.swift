@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class InventoryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let tableView = UITableView()
     private var inventories: [Inventory] = []
 
@@ -76,13 +76,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailViewController(id: inventories[indexPath.row].id)
-        navigationController?.pushViewController(detailVC, animated: true)
+        let inventoryDetailVC = InventoryDetailViewController(id: inventories[indexPath.row].id)
+        navigationController?.pushViewController(inventoryDetailVC, animated: true)
     }
 }
 
 // 新規データ作成完了時、アイテムデータを再取得
-extension MainViewController: InventoryCreationDelegate {
+extension InventoryListViewController: InventoryCreationDelegate {
     func didCreateNewInventory() {
         Task {
             await fetchInventories()

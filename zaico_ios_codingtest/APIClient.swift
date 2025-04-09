@@ -45,7 +45,7 @@ class APIClient {
         }
     }
 
-    func fetchInventorie(id: Int?) async throws -> Inventory {
+    func fetchInventory(id: Int?) async throws -> Inventory {
         var endpoint = "/api/v1/inventories"
 
         if let id = id {
