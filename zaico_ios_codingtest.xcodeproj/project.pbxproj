@@ -34,6 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Resources/Info.plist,
+				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITestsLaunchTests.swift,
 			);
@@ -47,6 +48,13 @@
 			);
 			target = 1008F35B2D801AD7001E560B /* zaico_ios_codingtestUITests */;
 		};
+		BE79C7112DA7CA2200E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
+			);
+			target = 1008F3512D801AD7001E560B /* zaico_ios_codingtestTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -54,6 +62,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1008F3642D801AD7001E560B /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtest" target */,
+				BE79C7112DA7CA2200E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */,
 				BE79C5DA2DA6D1BC00E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestUITests" target */,
 			);
 			path = zaico_ios_codingtest;
@@ -284,7 +293,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/zaico_ios_codingtest/App/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -312,7 +321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/zaico_ios_codingtest/App/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
