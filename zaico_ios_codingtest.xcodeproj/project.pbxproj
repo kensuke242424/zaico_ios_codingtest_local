@@ -33,9 +33,27 @@
 		1008F3642D801AD7001E560B /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtest" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				App/Resources/Info.plist,
+				Tests/zaico_ios_codingtestTests/zaico_ios_codingtestTests.swift,
+				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITests.swift,
+				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITestsLaunchTests.swift,
 			);
 			target = 1008F3382D801AD6001E560B /* zaico_ios_codingtest */;
+		};
+		BE79C5D42DA6D1B900E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/zaico_ios_codingtestTests/zaico_ios_codingtestTests.swift,
+			);
+			target = 1008F3512D801AD7001E560B /* zaico_ios_codingtestTests */;
+		};
+		BE79C5DA2DA6D1BC00E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITests.swift,
+				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITestsLaunchTests.swift,
+			);
+			target = 1008F35B2D801AD7001E560B /* zaico_ios_codingtestUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -44,18 +62,10 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1008F3642D801AD7001E560B /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtest" target */,
+				BE79C5D42DA6D1B900E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */,
+				BE79C5DA2DA6D1BC00E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestUITests" target */,
 			);
 			path = zaico_ios_codingtest;
-			sourceTree = "<group>";
-		};
-		1008F3552D801AD7001E560B /* zaico_ios_codingtestTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = zaico_ios_codingtestTests;
-			sourceTree = "<group>";
-		};
-		1008F35F2D801AD7001E560B /* zaico_ios_codingtestUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = zaico_ios_codingtestUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -89,8 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				1008F33B2D801AD6001E560B /* zaico_ios_codingtest */,
-				1008F3552D801AD7001E560B /* zaico_ios_codingtestTests */,
-				1008F35F2D801AD7001E560B /* zaico_ios_codingtestUITests */,
 				1008F33A2D801AD6001E560B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,9 +151,6 @@
 			dependencies = (
 				1008F3542D801AD7001E560B /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				1008F3552D801AD7001E560B /* zaico_ios_codingtestTests */,
-			);
 			name = zaico_ios_codingtestTests;
 			packageProductDependencies = (
 			);
@@ -165,9 +170,6 @@
 			);
 			dependencies = (
 				1008F35E2D801AD7001E560B /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1008F35F2D801AD7001E560B /* zaico_ios_codingtestUITests */,
 			);
 			name = zaico_ios_codingtestUITests;
 			packageProductDependencies = (
@@ -291,7 +293,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = zaico_ios_codingtest/Info.plist;
+				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -319,7 +321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = zaico_ios_codingtest/Info.plist;
+				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

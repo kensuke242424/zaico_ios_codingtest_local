@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIClient {
+class APIClient: APIClientProtocol {
     static let shared = APIClient()
     
     private let baseURL = "https://web.zaico.co.jp"
