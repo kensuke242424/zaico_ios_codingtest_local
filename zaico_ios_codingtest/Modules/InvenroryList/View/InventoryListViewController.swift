@@ -26,14 +26,13 @@ class InventoryListViewController: UIViewController, UITableViewDataSource, UITa
     private func setupNavigationBar() {
         title = "在庫一覧"
         
-        let createInventoryBarButton = UIBarButtonItem(title: "新規登録", style: .done, target: self, action: #selector(createInventoryBarButtonTapped))
+        let createInventoryBarButton = UIBarButtonItem(title: "新規登録", style: .done, target: self, action: #selector(didTapCreateInventoryBarButton))
         self.navigationItem.rightBarButtonItem = createInventoryBarButton
     }
     
-    @objc func createInventoryBarButtonTapped() {
-        let inventoryCreateVC = InventoryCreateViewController(inventories: inventories)
-        inventoryCreateVC.delegate = self
-        navigationController?.pushViewController(inventoryCreateVC, animated: true)
+    @objc func didTapCreateInventoryBarButton() {
+        let viewController = InventoryCreateBuilder.build(inventories: inventories, delegate: self)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func setupTableView() {
@@ -82,7 +81,7 @@ class InventoryListViewController: UIViewController, UITableViewDataSource, UITa
 }
 
 // 新規データ作成完了時、アイテムデータを再取得
-extension InventoryListViewController: InventoryCreationDelegate {
+extension InventoryListViewController: InventoryCreateDelegate {
     func didCreateNewInventory() {
         Task {
             await fetchInventories()

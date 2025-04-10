@@ -7,25 +7,30 @@
 
 import UIKit
 
-protocol InventoryCreationDelegate: AnyObject {
-    func didCreateNewInventory()
-}
-
 class InventoryCreateViewController: UIViewController, UITextFieldDelegate {
     
-    private let inventories: [Inventory]
-    private let titleLabel = UILabel()
-    private let textField = UITextField()
-    weak var delegate: InventoryCreationDelegate?
+    private let titleTextField = UITextField()
     
-    init(inventories: [Inventory], delegate: InventoryCreationDelegate? = nil) {
-        self.inventories = inventories
-        self.delegate = delegate
+    private var presenter: InventoryCreatePresenterInterface?
+    
+    // 安全なラッパーでクラッシュを防ぐ
+    private var safePresenter: InventoryCreatePresenterInterface {
+        guard let presenter else {
+            fatalError("InventoryCreatePresenter has not been injected.")
+        }
+        return presenter
+    }
+    
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func inject(presenter: InventoryCreatePresenterInterface) {
+        self.presenter = presenter
     }
     
     override func viewDidLoad() {
@@ -58,86 +63,54 @@ class InventoryCreateViewController: UIViewController, UITextFieldDelegate {
         config.attributedTitle = AttributedString("完了", attributes: AttributeContainer([.font: smallFont]))
         
         doneButton.configuration = config
-        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         
         return doneButton
     }
     
-    @objc func doneButtonTapped() {
-        if inventories.contains(where: { $0.title == textField.text }) {
-            showAlertMessage(title: "確認", "\n物品名\n\n上記の項目で同じ在庫データが既に作成されています。このまま在庫データを作成してもよろしいですか？")
-        } else {
-            submitNewInventory()
-        }
+    @objc func didTapDoneButton() {
+        let inventory = Inventory(
+            id: 0,
+            title: normalizedTitle(from: titleTextField.text),
+            quantity: nil,
+            itemImage: nil
+        )
+        
+        safePresenter.didTapDoneButton(with: inventory)
     }
     
-    private func showAlertMessage(title: String? = nil, _ message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        // OKボタン
-        alert.addAction(UIAlertAction(title: "はい", style: .default, handler: { _ in
-            self.submitNewInventory()
-        }))
-        // キャンセルボタン
-        alert.addAction(UIAlertAction(title: "いいえ", style: .cancel, handler: { _ in
-            // 処理なし
-        }))
-        
-        present(alert, animated: true)
-    }
-    
-    private func submitNewInventory() {
-        Task {
-            let result = await createInventory()
-            
-            if result {
-                delegate?.didCreateNewInventory()
-                navigationController?.popViewController(animated: true)
-            } else {
-                showErrorMessage("データの作成に失敗しました。再試行してください。")
-            }
+    // タイトルが空なら "-" に変換して在庫データを作成・送信
+    private func normalizedTitle(from input: String?) -> String {
+        guard let input, !input.isEmpty else {
+            return "-"
         }
-    }
-    
-    private func createInventory() async -> Bool {
-        
-        // タイトル入力が空の場合には「-」を挿入する
-        let inventoryTitle = textField.text?.isEmpty == true ? "-" : textField.text!
-        
-        let data = Inventory(id: 0, title: inventoryTitle, quantity: nil, itemImage: nil)
-        
-        do {
-            try await APIClient.shared.createInventory(data)
-            return true
-        } catch {
-            print("Error create data: \(error.localizedDescription)")
-            return false
-        }
+        return input
     }
     
     private func setupTitleTextField() {
+        let titleLabel = UILabel()
         titleLabel.text = "物品名"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         titleLabel.textColor = .darkGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "物品名を入力"
-        textField.delegate = self
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField.borderStyle = .roundedRect
+        titleTextField.placeholder = "物品名を入力"
+        titleTextField.delegate = self
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(titleLabel)
-        view.addSubview(textField)
+        view.addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             
-            textField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            textField.heightAnchor.constraint(equalToConstant: 60)
+            titleTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            titleTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            titleTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         
         // タップジェスチャーの追加（背景タップでキーボードを閉じる）
@@ -155,10 +128,34 @@ class InventoryCreateViewController: UIViewController, UITextFieldDelegate {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension InventoryCreateViewController: InventoryCreateViewInterface {
+    func showDuplicateAlert(title: String?, message: String, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "はい", style: .default, handler: { _ in
+            completion(true)
+        }))
+        alert.addAction(UIAlertAction(title: "いいえ", style: .cancel, handler: { _ in
+            completion(false)
+        }))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
     
-    private func showErrorMessage(_ message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    func showErrorAlert(title: String?, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func closeView() {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

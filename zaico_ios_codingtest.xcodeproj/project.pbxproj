@@ -293,7 +293,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = zaico_ios_codingtest/Info.plist;
+				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -321,7 +321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RJGM243A9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = zaico_ios_codingtest/Info.plist;
+				INFOPLIST_FILE = /Users/ken/Documents/ProgramingData/MyProject/zaico_ios_codingtest_local/zaico_ios_codingtest/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
