@@ -34,7 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Resources/Info.plist,
-				Tests/zaico_ios_codingtestTests/zaico_ios_codingtestTests.swift,
+				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITestsLaunchTests.swift,
 			);
@@ -43,7 +43,7 @@
 		BE79C5D42DA6D1B900E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Tests/zaico_ios_codingtestTests/zaico_ios_codingtestTests.swift,
+				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
 			);
 			target = 1008F3512D801AD7001E560B /* zaico_ios_codingtestTests */;
 		};
