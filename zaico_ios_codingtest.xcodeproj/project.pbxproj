@@ -34,18 +34,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Resources/Info.plist,
-				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITests.swift,
 				Tests/zaico_ios_codingtestUITests/zaico_ios_codingtestUITestsLaunchTests.swift,
 			);
 			target = 1008F3382D801AD6001E560B /* zaico_ios_codingtest */;
-		};
-		BE79C5D42DA6D1B900E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Tests/zaico_ios_codingtestTests/InventoryCreate/InventoryCreatePresenterTests.swift,
-			);
-			target = 1008F3512D801AD7001E560B /* zaico_ios_codingtestTests */;
 		};
 		BE79C5DA2DA6D1BC00E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -62,7 +54,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1008F3642D801AD7001E560B /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtest" target */,
-				BE79C5D42DA6D1B900E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestTests" target */,
 				BE79C5DA2DA6D1BC00E7246C /* Exceptions for "zaico_ios_codingtest" folder in "zaico_ios_codingtestUITests" target */,
 			);
 			path = zaico_ios_codingtest;

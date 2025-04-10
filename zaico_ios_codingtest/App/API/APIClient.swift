@@ -11,7 +11,7 @@ class APIClient: APIClientProtocol {
     static let shared = APIClient()
     
     private let baseURL = "https://web.zaico.co.jp"
-    private let token = "MQgTpVoHzR24o9YXSmuNZRJeZVQ7MFN3" // 実際のトークンに置き換える
+    private let token = ProcessInfo.processInfo.environment["MY_API_TOKEN"] ?? ""
     
     private init() {}
     
